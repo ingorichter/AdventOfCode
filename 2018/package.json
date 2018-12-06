@@ -1,0 +1,20 @@
+{
+  "name": "AdventOfCode2018",
+  "version": "1.0.0",
+  "description": "Solutions for Advent of Code 2018",
+  "main": "index.js",
+  "repository": "https://github.com/ingorichter/adventofcode",
+  "author": "Ingo Richter <ingo.richter+github@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint .",
+      "test": "ava day-*/**/test*.js",
+      "coverage": "nyc ava day-*/**/test*.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "eslint": "^5.9.0",
+    "nyc": "^13.1.0"
+  }
+}
