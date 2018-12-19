@@ -68,3 +68,4 @@ test('should calculate first duplicate frequency from +7, +7, -2, -7, -4', t => 
     t.plan(1);
     t.is(6, chronalCalibration2(changes));
 });
+

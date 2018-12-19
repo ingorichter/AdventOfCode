@@ -2,7 +2,7 @@ import test from 'ava';
 const overlappingClaims = require('./OverlappingClaims');
 const notOverlappingClaim = require('./OverlappingClaims-2');
 
-test('should calculate how many sqaure inches of fabric are withing two or more claims', t => {
+test('should calculate how many square inches of fabric are within two or more claims', t => {
     const claims = [
 	'#1 @ 1,3: 4x4',
 	'#2 @ 3,1: 4x4',
@@ -14,7 +14,7 @@ test('should calculate how many sqaure inches of fabric are withing two or more 
     t.is(4, overlappingClaims(claims));
 });
 
-test('should calculate how many sqaure inches of fabric are withing two or more claims', t => {
+test('should calculate how many square inches of fabric are within two or more claims larger claims', t => {
     const claims = [
 	'#1196 @ 835,510: 29x14',
 	'#1197 @ 427,904: 23x25',

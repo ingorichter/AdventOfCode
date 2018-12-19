@@ -8,13 +8,14 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-      "test": "ava day-*/**/test*.js",
-      "coverage": "nyc ava day-*/**/test*.js"
+    "test": "ava day-*/**/test*.js",
+    "test:watch": "ava day-*/**/test*.js --watch",
+    "coverage": "nyc ava day-*/**/test*.js"
   },
   "dependencies": {},
   "devDependencies": {
-    "ava": "^0.25.0",
-    "eslint": "^5.9.0",
+    "ava": "^1.0.1",
+    "eslint": "^5.10.0",
     "nyc": "^13.1.0"
   }
 }

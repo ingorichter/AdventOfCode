@@ -45,10 +45,8 @@ const notOverlappingClaim = (claims) => {
 		} else {
 			notOverlappingClaims.add(rectangle.id);
 		}
-
 	});
 	
-	console.log(notOverlappingClaims.size);
 	return Array.from(notOverlappingClaims.values())[0];
 };
 
