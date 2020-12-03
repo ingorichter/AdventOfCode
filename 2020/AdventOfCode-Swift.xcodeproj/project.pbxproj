@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		710D9374238541B90050BD59 /* AdventOfCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710D9373238541B90050BD59 /* AdventOfCode.swift */; };
+		D44697632578AF1800AEF9E1 /* Day02_P2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44697622578AF1800AEF9E1 /* Day02_P2.swift */; };
 		E2B2CAD8DDF954D57B319E6D /* Day01_P2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2CD4F221533B950207560 /* Day01_P2.swift */; };
 		E981328B23849CBB0004E844 /* Day01.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981328A23849CBA0004E844 /* Day01.swift */; };
 		E981328E23849CC40004E844 /* Day02.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981328C23849CC40004E844 /* Day02.swift */; };
@@ -53,6 +54,7 @@
 		710D9373238541B90050BD59 /* AdventOfCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventOfCode.swift; sourceTree = "<group>"; };
 		71F4D8A0238FDAC500E27D74 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		71F4D8A1238FDACB00E27D74 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D44697622578AF1800AEF9E1 /* Day02_P2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day02_P2.swift; sourceTree = "<group>"; };
 		E2B2CD4F221533B950207560 /* Day01_P2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day01_P2.swift; sourceTree = "<group>"; };
 		E981328923849CBA0004E844 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		E981328A23849CBA0004E844 /* Day01.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day01.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				E981328C23849CC40004E844 /* Day02.swift */,
+				D44697622578AF1800AEF9E1 /* Day02_P2.swift */,
 				E981328D23849CC40004E844 /* input.txt */,
 			);
 			path = Day02;
@@ -475,6 +478,7 @@
 				E98132A623849DFD0004E844 /* Day10.swift in Sources */,
 				E98132A923849E060004E844 /* Day11.swift in Sources */,
 				E98132AC23849E100004E844 /* Day12.swift in Sources */,
+				D44697632578AF1800AEF9E1 /* Day02_P2.swift in Sources */,
 				E98132AF23849E1B0004E844 /* Day13.swift in Sources */,
 				E98132B823849E590004E844 /* Day15.swift in Sources */,
 				E98132B223849E2A0004E844 /* Day14.swift in Sources */,
