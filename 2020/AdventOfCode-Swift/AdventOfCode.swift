@@ -36,6 +36,7 @@ enum AdventOfCode {
             Day03_P2.solve()
         case 4:
             Day04.solve()
+            Day04_P2.solve()
         case 5:
             Day05.solve()
         case 6:
