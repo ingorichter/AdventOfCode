@@ -12,6 +12,8 @@
 		D44697AD257CA0C100AEF9E1 /* Day03_P2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44697AC257CA0C100AEF9E1 /* Day03_P2.swift */; };
 		D44697C5257CB3AC00AEF9E1 /* Day04_P2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44697C4257CB3AC00AEF9E1 /* Day04_P2.swift */; };
 		D44697C9257DD68200AEF9E1 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44697C8257DD68200AEF9E1 /* Passport.swift */; };
+		D4C81C6E2580B24300C9144C /* Day05_P2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C81C6D2580B24300C9144C /* Day05_P2.swift */; };
+		D4C81C722580B26200C9144C /* BinaryBoardingPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C81C712580B26200C9144C /* BinaryBoardingPass.swift */; };
 		E2B2CAD8DDF954D57B319E6D /* Day01_P2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2CD4F221533B950207560 /* Day01_P2.swift */; };
 		E981328B23849CBB0004E844 /* Day01.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981328A23849CBA0004E844 /* Day01.swift */; };
 		E981328E23849CC40004E844 /* Day02.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981328C23849CC40004E844 /* Day02.swift */; };
@@ -61,6 +63,8 @@
 		D44697AC257CA0C100AEF9E1 /* Day03_P2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day03_P2.swift; sourceTree = "<group>"; };
 		D44697C4257CB3AC00AEF9E1 /* Day04_P2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day04_P2.swift; sourceTree = "<group>"; };
 		D44697C8257DD68200AEF9E1 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
+		D4C81C6D2580B24300C9144C /* Day05_P2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day05_P2.swift; sourceTree = "<group>"; };
+		D4C81C712580B26200C9144C /* BinaryBoardingPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryBoardingPass.swift; sourceTree = "<group>"; };
 		E2B2CD4F221533B950207560 /* Day01_P2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day01_P2.swift; sourceTree = "<group>"; };
 		E981328923849CBA0004E844 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		E981328A23849CBA0004E844 /* Day01.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day01.swift; sourceTree = "<group>"; };
@@ -271,7 +275,9 @@
 			isa = PBXGroup;
 			children = (
 				E981329523849DB10004E844 /* Day05.swift */,
+				D4C81C6D2580B24300C9144C /* Day05_P2.swift */,
 				E981329623849DB10004E844 /* input.txt */,
+				D4C81C712580B26200C9144C /* BinaryBoardingPass.swift */,
 			);
 			path = Day05;
 			sourceTree = "<group>";
@@ -484,6 +490,7 @@
 				E981329A23849DBC0004E844 /* Day06.swift in Sources */,
 				E981329D23849DCA0004E844 /* Day07.swift in Sources */,
 				E98132A023849DE80004E844 /* Day08.swift in Sources */,
+				D4C81C722580B26200C9144C /* BinaryBoardingPass.swift in Sources */,
 				E98132A323849DF30004E844 /* Day09.swift in Sources */,
 				E98132A623849DFD0004E844 /* Day10.swift in Sources */,
 				E98132A923849E060004E844 /* Day11.swift in Sources */,
@@ -494,6 +501,7 @@
 				E98132B223849E2A0004E844 /* Day14.swift in Sources */,
 				E98132B523849E530004E844 /* Day16.swift in Sources */,
 				E98132C123849E820004E844 /* Day17.swift in Sources */,
+				D4C81C6E2580B24300C9144C /* Day05_P2.swift in Sources */,
 				E98132BE23849E7B0004E844 /* Day18.swift in Sources */,
 				E98132BB23849E750004E844 /* Day19.swift in Sources */,
 				E98132D323849EEB0004E844 /* Day20.swift in Sources */,
