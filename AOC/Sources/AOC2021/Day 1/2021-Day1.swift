@@ -7,15 +7,15 @@
 //
 
 class Day1: Day {
-    override func run() -> (String, String) {
-        super.run()
-    }
-
     override func part1() -> String {
-        #function
+        let howManyTimesIncreased = input.lines.integers.adjacentPairs().count { $1 > $0 }
+
+        return "\(howManyTimesIncreased)"
     }
 
     override func part2() -> String {
-        #function
+        let increasedWindowSums = input.lines.integers.windows(ofCount: 3).map(\.sum).adjacentPairs().count { $1 > $0 }
+
+        return "\(increasedWindowSums)"
     }
 }
