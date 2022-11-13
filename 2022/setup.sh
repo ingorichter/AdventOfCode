@@ -29,8 +29,20 @@ let mainContents = """
 //
 
 import Foundation
+import ArgumentParser
 
 @_exported import AOCCore
+
+@main
+struct AOC\(year): ParsableCommand {
+    @Argument(help: \"Day to run\")
+    var day = 1
+
+    mutating func run() throws {
+        print(\"Run Day \\(day)\")
+    }
+}
+
 """
 mainContents >> yearFolder.appendingPathComponent("AOC\(year).swift")
 
@@ -40,24 +52,28 @@ for day in 1 ... 25 {
 
     let dayContents = """
     //
-    //  Day\(day).swift
-    //  test
+    //  \(year)-Day\(day).swift
+    //  Solutions for Day \(day)
     //
     //  Created by Ingo Richter on \(todayString).
     //  Copyright © \(year) Ingo Richter. All rights reserved.
     //
 
     class Day\(day): Day {
-        override func run() -> (String, String) {
-            super.run()
+        static var rawInput: String? { nil }
+
+        func part1() async throws -> String {
+            return #function
         }
 
-        override func part1() -> String {
-            #function
+        func part2() async throws -> String {
+            return #function
         }
 
-        override func part2() -> String {
-            #function
+        func run() async throws -> (String, String) {
+            let p1 = try await part1()
+            let p2 = try await part2()
+            return (p1, p2)
         }
     }
 
@@ -67,7 +83,10 @@ for day in 1 ... 25 {
     "" >> resourcesFolder.appendingPathComponent("Day\(day).txt")
 }
 
-let testFile = u.appendingPathComponent("Tests").appendingPathComponent("AOCTests").appendingPathComponent("Test\(year).swift")
+let testFolder = currentDir.appendingPathComponent("Tests").appendingPathComponent("AOCTests")
+let testFile = testFolder.appendingPathComponent("Test\(year).swift")
+
+mkdir(testFolder)
 
 var contents = """
 //
@@ -81,15 +100,15 @@ var contents = """
 import XCTest
 @testable import AOC\(year)
 
-class Test\(year): XCTestCase {
+final class Test\(year): XCTestCase {
 """
 
 for day in 1 ... 25 {
     let testContents = """
 
-        func testDay\(day)() {
+        func testDay\(day)() async throws {
             let day = Day\(day)()
-            let (part1, part2) = day.run()
+            let (part1, part2) = try await day.run()
 
             XCTAssertEqual(part1, "")
             XCTAssertEqual(part2, "")
@@ -112,5 +131,5 @@ func mkdir(_ path: URL) {
 
 infix operator >>
 func >> (lhs: String, rhs: URL) {
-    try Data(lhs.utf8).write(to: rhs, options: [])
+    try? Data(lhs.utf8).write(to: rhs, options: [])
 }
