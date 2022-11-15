@@ -22,11 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Resolve
-      run: swift package resolve
+      run: cd 2022 && swift package resolve
     - name: Build
-      run: swift build
+      run: cd 2022 && swift build
     - name: Run tests
-      run: swift test 2>&1 | xcpretty
+      run: cd 2022 && swift test 2>&1 | xcpretty
   linux:
     runs-on: ubuntu-latest
     container: swift:5.7
