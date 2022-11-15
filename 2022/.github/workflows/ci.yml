@@ -1,0 +1,43 @@
+name: "AdventOfCode CI"
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/**'
+      - 'Package.swift'
+      - 'Source/**'
+      - 'Tests/**'
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - 'Package.swift'
+      - 'Source/**'
+      - 'Tests/**'
+
+jobs:
+  Linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # - image: swift:5.7-bionic
+          - image: swift:5.7-focal
+          # - image: swift:5.7-centos7
+          # - image: swift:5.7-amazonlinux2
+          # - image: swiftlang/swift:nightly-bionic
+          # - image: swiftlang/swift:nightly-focal
+          # - image: swiftlang/swift:nightly-jammy
+          # - image: swiftlang/swift:nightly-centos7
+          # - image: swiftlang/swift:nightly-centos8
+          # - image: swiftlang/swift:nightly-amazonlinux2
+    container:
+      image: ${{ matrix.image }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - name: ${{ matrix.image }}
+        run: swift build --build-tests -c debug
