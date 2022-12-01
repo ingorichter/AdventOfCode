@@ -7,8 +7,6 @@
 //
 
 class Day10: Day {
-    static var rawInput: String? { nil }
-
     func part1() async throws -> String {
         return #function
     }

@@ -38,7 +38,7 @@ public final class Input: StringInput {
         if let e = inputs[caller.description] { return e }
 
         var path = caller.description.split(separator: "/")
-        let day = path.compactMap { dayNumber.firstMatch(in: $0)?.int(1) }.first ?? 0
+        _ = path.compactMap { dayNumber.firstMatch(in: $0)?.int(1) }.first ?? 0
 
         if path.last?.hasSuffix(".swift") == true { path.removeLast() }
 

@@ -7,14 +7,16 @@
 //
 
 class Day1: Day {
-    static var rawInput: String? { nil }
-
     func part1() async throws -> String {
-        return #function
+        let numOfElves = input().lines.split(on: { $0.raw.isEmpty }).map(\.integers.sum)
+        let elveWithMostCalories = numOfElves.max()!
+        return String(elveWithMostCalories)
     }
 
     func part2() async throws -> String {
-        return #function
+        let numOfElves = input().lines.split(on: { $0.raw.isEmpty }).map(\.integers.sum)
+        let elveWithMostCalories = numOfElves.max(count: 3).sum
+        return String(elveWithMostCalories)
     }
 
     func run() async throws -> (String, String) {
