@@ -1,6 +1,7 @@
 //
 //  2022-Day1.swift
 //  Solutions for Day 1
+//  https://adventofcode.com/2022/day/1
 //
 //  Created by Ingo Richter on 11/13/22.
 //  Copyright © 2022 Ingo Richter. All rights reserved.
