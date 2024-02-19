@@ -1,14 +1,10 @@
 #!/usr/bin/env cargo +nightly -Zscript
-
-//! ```cargo
-//! [package]
-//! edition = "2021"
-//!
-//! [dependencies]
-//! clap = { version = "4.2", features = ["derive"] }
-//! nom = "7.1.3"
-//! reqwest = { version = "0.11.22", features=["blocking"] }
-//! ```
+```
+[dependencies]
+clap = { version = "4.2", features = ["derive"] }
+nom = "7.1.3"
+reqwest = { version = "0.11.22", features=["blocking"] }
+```
 
 use clap::{error::ErrorKind, CommandFactory, Parser};
 use nom::{
@@ -41,7 +37,7 @@ fn parse_day(input: &str) -> IResult<&str, u32> {
 
 fn main() -> Result<(), reqwest::Error> {
     let session = std::env::var("SESSION")
-        .expect("should have a session token set");
+        .expect("should have a session token set");    dbg!(&session);
     let args = Args::parse();
     let Ok((_, day)) = parse_day(&args.day) else {
         let mut cmd = Args::command();
