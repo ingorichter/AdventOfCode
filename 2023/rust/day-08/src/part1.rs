@@ -35,7 +35,7 @@ pub fn process(
                         match c {
                           'L' => instructions.push(Direction::Left),
                           'R' => instructions.push(Direction::Right),
-                          _ => {} 
+                          _ => {}
                         }
                       });
                     }
