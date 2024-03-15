@@ -78,7 +78,7 @@ pub fn process(
         let mut current_value = *seed;
 
         for item in mappings.iter().enumerate() {
-            let (index, ranges) = item;
+            let (_index, ranges) = item;
             for range in ranges {
                 if range.source.contains(&current_value) {
                     // dbg!(range);
