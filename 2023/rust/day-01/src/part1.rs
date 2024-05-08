@@ -1,7 +1,7 @@
 use crate::custom_error::AocError;
 
 pub fn extract_digits(line: &str) -> Vec<char> {
-    return line.chars().filter(|c| c.is_ascii_digit()).collect()
+    return line.chars().filter(|c| c.is_ascii_digit()).collect();
 }
 
 #[tracing::instrument]

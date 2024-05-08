@@ -1,137 +1,17 @@
-use std::{
-    collections::{HashMap, HashSet},
-    ops,
-};
+use std::collections::{HashMap, HashSet};
 
 use itertools::Itertools;
 
+use crate::common::is_safe;
+use crate::common::make_grid;
+use crate::common::Grid;
 use crate::custom_error::AocError;
-
-#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
-enum Tile {
-    VerticalPipe,
-    HorizontalPipe,
-    NorthEastBend,
-    NorthWestBend,
-    SouthWestBend,
-    SouthEastBend,
-    Ground,
-    Start,
-}
-
-#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
-struct Point2D {
-    x: i32,
-    y: i32,
-}
-
-const NORTH: Point2D = Point2D { x: 0, y: -1 };
-const SOUTH: Point2D = Point2D { x: 0, y: 1 };
-const WEST: Point2D = Point2D { x: -1, y: 0 };
-const EAST: Point2D = Point2D { x: 1, y: 0 };
-
-impl Point2D {
-    fn new(x: i32, y: i32) -> Self {
-        Self { x, y }
-    }
-
-    fn add(&self, other: &Point2D) -> Self {
-        Self {
-            x: self.x + other.x,
-            y: self.y + other.y,
-        }
-    }
-
-    fn sub(&self, other: &Point2D) -> Self {
-        Self {
-            x: self.x - other.x,
-            y: self.y - other.y,
-        }
-    }
-
-    fn neighbors(&self) -> Vec<Point2D> {
-        vec![
-            self.add(&NORTH),
-            self.add(&SOUTH),
-            self.add(&WEST),
-            self.add(&EAST),
-        ]
-    }
-}
-
-impl ops::Add<Point2D> for Point2D {
-    type Output = Point2D;
-
-    fn add(self, other: Point2D) -> Point2D {
-        Point2D {
-            x: self.x + other.x,
-            y: self.y + other.y,
-        }
-    }
-}
-
-impl ops::Sub<Point2D> for Point2D {
-    type Output = Point2D;
-
-    fn sub(self, other: Point2D) -> Point2D {
-        Point2D {
-            x: self.x - other.x,
-            y: self.y - other.y,
-        }
-    }
-}
-
-fn is_safe<T>(point: &Point2D, grid: &Grid<T>) -> bool {
-    if point.x < 0 || point.x >= grid.columns() as i32 {
-        return false;
-    }
-    if point.y < 0 || point.y >= grid.rows() as i32 {
-        return false;
-    }
-    true
-}
-
-#[derive(Debug)]
-struct Grid<T> {
-    grid: Vec<Vec<T>>,
-}
-
-impl<T> Grid<T> {
-    fn new(grid: Vec<Vec<T>>) -> Self {
-        Self { grid }
-    }
-
-    fn rows(&self) -> usize {
-        self.grid.len()
-    }
-
-    fn columns(&self) -> usize {
-        self.grid[0].len()
-    }
-
-    fn get(&self, point: &Point2D) -> Option<&T> {
-        if !is_safe(point, self) {
-            return None;
-        }
-        Some(&self.grid[point.y as usize][point.x as usize])
-    }
-
-    fn set(&mut self, point: &Point2D, value: T) {
-        if !is_safe(point, self) {
-            return;
-        }
-        self.grid[point.y as usize][point.x as usize] = value;
-    }
-
-    fn push(&mut self, row: Vec<T>) {
-        self.grid.push(row);
-    }
-}
+use crate::common::Tile;
+use crate::common::Point2D;
+use crate::common::{EAST, NORTH, SOUTH, WEST};
 
 #[tracing::instrument]
 pub fn process(input: &str) -> miette::Result<String, AocError> {
-    let mut grid: Grid<Tile> = Grid::new(vec![]);
-
     // mapping from tile and direction that we were moving to the new direction
     let directions: HashMap<(Tile, Point2D), Point2D> = HashMap::from([
         ((Tile::VerticalPipe, SOUTH), SOUTH),
@@ -148,22 +28,7 @@ pub fn process(input: &str) -> miette::Result<String, AocError> {
         ((Tile::SouthEastBend, NORTH), EAST),
     ]);
 
-    input.lines().for_each(|line| {
-        // grid.push(line.chars().collect());
-        let mut row: Vec<Tile> = vec![];
-        line.chars().for_each(|c| match c {
-            '|' => row.push(Tile::VerticalPipe),
-            '-' => row.push(Tile::HorizontalPipe),
-            'L' => row.push(Tile::NorthEastBend),
-            'F' => row.push(Tile::SouthEastBend),
-            '7' => row.push(Tile::SouthWestBend),
-            'J' => row.push(Tile::NorthWestBend),
-            '.' => row.push(Tile::Ground),
-            'S' => row.push(Tile::Start),
-            _ => (),
-        });
-        grid.push(row);
-    });
+    let grid: Grid<Tile> = make_grid(input);
 
     // dbg!(&grid);
 
