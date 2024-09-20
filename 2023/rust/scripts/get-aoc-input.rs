@@ -1,10 +1,10 @@
-#!/usr/bin/env cargo +nightly -Zscript
-```
-[dependencies]
-clap = { version = "4.2", features = ["derive"] }
-nom = "7.1.3"
-reqwest = { version = "0.11.22", features=["blocking"] }
-```
+#!/usr/bin/env rust-script
+//! ```cargo
+//! [dependencies]
+//! clap = { version = "4.2", features = ["derive"] }
+//! nom = "7.1.3"
+//! reqwest = { version = "0.11.22", features=["blocking"] }
+//! ```
 
 use clap::{error::ErrorKind, CommandFactory, Parser};
 use nom::{

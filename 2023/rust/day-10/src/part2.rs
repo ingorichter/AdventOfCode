@@ -81,6 +81,7 @@ pub fn process(
         }
     }
 
+    
     // dbg!(&start_point);
 
     let valid_neighbors = start_point
