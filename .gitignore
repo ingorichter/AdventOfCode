@@ -63,3 +63,7 @@ typings/
 # tmp/backup
 \#*\#
 .\#*
+
+# rust build artefacts
+.fingerprint/
+*/rust/target
