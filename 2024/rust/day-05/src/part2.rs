@@ -1,9 +1,3 @@
-fn all_pairs<T>(vec: &[T]) -> impl Iterator<Item = (&T, &T)> {
-    vec.iter().enumerate().flat_map(move |(i, x)| {
-        vec.iter().skip(i + 1).map(move |y| (x, y))
-    })
-}
-
 #[tracing::instrument]
 pub fn process(input: &str) -> miette::Result<String> {
     let mut rules: Vec<(u32, u32)> = vec![]; // pair of u32
@@ -37,22 +31,40 @@ pub fn process(input: &str) -> miette::Result<String> {
     }
 
     // instead of copying the valid update, I could probably filter the existing updates and return only the valid ones
-    let valid_updates = pages_to_update.iter().filter(|update| {
-        // update.all_pairs().all(|pair| rules.contains(&pair))
-        let mut pass_all_rules = true;
+    let invalid_updates = pages_to_update.iter().filter(|update| {
+        let mut pass_not_all_rules = false;
         for start_index in 0..update.len() - 1 {
             for index in start_index..update.len() - 1 {
                 let pair = (update[start_index], update[index + 1]);
 
                 if !rules.contains(&pair) {
                     // println!("pair: {:?} is not in rules", pair);
-                    pass_all_rules = false;
+                    pass_not_all_rules = true;
                     break;
                 }
             }
         }
-        pass_all_rules
+        pass_not_all_rules
     }).cloned().collect::<Vec<Vec<u32>>>();
+
+    let mut valid_updates: Vec<Vec<u32>> = vec![];
+
+    for mut update in invalid_updates {
+        for start_index in 0..update.len() - 1 {
+            for index in start_index..update.len() - 1 {
+                let pair = (update[start_index], update[index + 1]);
+
+                if !rules.contains(&pair) {
+                    // check if the reverse pair is in rules
+                    let reverse_pair = (update[index + 1], update[start_index]);
+                    if rules.contains(&reverse_pair) {
+                        update.swap(start_index, index + 1);
+                    }
+                }
+            }
+        }
+        valid_updates.push(update.clone());
+    }
 
     let sum: u32 = valid_updates.iter().map(|update| {
         update[update.len() / 2]
@@ -95,7 +107,7 @@ mod tests {
 75,97,47,61,53
 61,13,29
 97,13,75,29,47";
-        assert_eq!("143", process(input)?);
+        assert_eq!("123", process(input)?);
         Ok(())
     }
 }
