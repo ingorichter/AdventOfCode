@@ -1,6 +1,6 @@
 type Grid = Vec<Vec<char>>;
 
-fn count_word_occurrences(grid_chars: Grid, word: &str) -> usize {
+fn count_word_occurrences(grid_chars: &Grid, word: &str) -> usize {
     let nrows = grid_chars.len();
     let ncols = grid_chars[0].len();
     let word_len = word.len();
@@ -9,7 +9,7 @@ fn count_word_occurrences(grid_chars: Grid, word: &str) -> usize {
     let mut count = 0;
 
     // Horizontal search
-    for row in &grid_chars {
+    for row in grid_chars {
         let row_str: String = row.iter().collect();
         count += count_substring(&row_str, word);
         count += count_substring(&row_str, &reversed_word);
@@ -94,7 +94,7 @@ fn diagonal_tr_bl(grid: &[Vec<char>], start_row: usize, start_col: usize, word_l
 pub fn process(input: &str) -> miette::Result<String> {
     let grid: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
     let word = "XMAS";
-    let count = count_word_occurrences(grid, word);
+    let count = count_word_occurrences(&grid, word);
     Ok(count.to_string())
 }
 
