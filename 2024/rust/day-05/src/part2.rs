@@ -1,3 +1,9 @@
+fn all_pairs<T>(vec: &[T]) -> impl Iterator<Item = (&T, &T)> {
+    vec.iter()
+        .enumerate()
+        .flat_map(move |(i, x)| vec.iter().skip(i + 1).map(move |y| (x, y)))
+}
+
 #[tracing::instrument]
 pub fn process(input: &str) -> miette::Result<String> {
     let mut rules: Vec<(u32, u32)> = vec![]; // pair of u32
@@ -31,25 +37,13 @@ pub fn process(input: &str) -> miette::Result<String> {
     }
 
     // instead of copying the valid update, I could probably filter the existing updates and return only the valid ones
-    let invalid_updates = pages_to_update.iter().filter(|update| {
-        let mut pass_not_all_rules = false;
-        for start_index in 0..update.len() - 1 {
-            for index in start_index..update.len() - 1 {
-                let pair = (update[start_index], update[index + 1]);
+    let mut invalid_updates: Vec<Vec<u32>> = pages_to_update
+        .iter()
+        .filter(|update| all_pairs(update).any(|pair| !rules.contains(&(*pair.0, *pair.1))))
+        .cloned()
+        .collect::<Vec<Vec<u32>>>(); // let invalid_updates = pages_to_update.iter().filter(|update| {
 
-                if !rules.contains(&pair) {
-                    // println!("pair: {:?} is not in rules", pair);
-                    pass_not_all_rules = true;
-                    break;
-                }
-            }
-        }
-        pass_not_all_rules
-    }).cloned().collect::<Vec<Vec<u32>>>();
-
-    let mut valid_updates: Vec<Vec<u32>> = vec![];
-
-    for mut update in invalid_updates {
+    for update in &mut invalid_updates {
         for start_index in 0..update.len() - 1 {
             for index in start_index..update.len() - 1 {
                 let pair = (update[start_index], update[index + 1]);
@@ -63,12 +57,12 @@ pub fn process(input: &str) -> miette::Result<String> {
                 }
             }
         }
-        valid_updates.push(update.clone());
     }
 
-    let sum: u32 = valid_updates.iter().map(|update| {
-        update[update.len() / 2]
-    }).sum();
+    let sum = invalid_updates
+        .iter()
+        .map(|update| update.get(update.len() / 2).copied().unwrap_or_default())
+        .sum::<u32>();
 
     Ok(sum.to_string())
 }

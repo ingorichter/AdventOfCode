@@ -35,28 +35,12 @@ pub fn process(input: &str) -> miette::Result<String> {
             pages_to_update.push(group);
         }
     }
-
+ 
     // instead of copying the valid update, I could probably filter the existing updates and return only the valid ones
-    let valid_updates = pages_to_update.iter().filter(|update| {
-        // update.all_pairs().all(|pair| rules.contains(&pair))
-        let mut pass_all_rules = true;
-        for start_index in 0..update.len() - 1 {
-            for index in start_index..update.len() - 1 {
-                let pair = (update[start_index], update[index + 1]);
-
-                if !rules.contains(&pair) {
-                    // println!("pair: {:?} is not in rules", pair);
-                    pass_all_rules = false;
-                    break;
-                }
-            }
-        }
-        pass_all_rules
-    }).cloned().collect::<Vec<Vec<u32>>>();
-
-    let sum: u32 = valid_updates.iter().map(|update| {
-        update[update.len() / 2]
-    }).sum();
+    let sum: u32 = pages_to_update.iter()
+    .filter(|update| all_pairs(update).all(|pair| rules.contains(&(*pair.0, *pair.1))))
+    .map(|update| update[update.len() / 2])
+    .sum();
 
     Ok(sum.to_string())
 }
