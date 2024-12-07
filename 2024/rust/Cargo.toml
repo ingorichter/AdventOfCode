@@ -5,7 +5,7 @@ members = [ "aoc-common", "day-*"]
 default-members = ["day-*"]
 
 [workspace.dependencies]
-divan = "0.1.7"
+divan = "0.1.17"
 glam = "0.29.0"
 itertools = "0.13.0"
 miette = { version = "7.4", features = ["fancy"] }
@@ -16,9 +16,10 @@ rayon = "1.10.0"
 regex = "1.7.0"
 rstest = "0.23.0"
 rstest_reuse = "0.7.0"
-thiserror = "2.0.4"
+thiserror = "2.0.5"
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.18", features = ["fmt", "env-filter"] }
 test-log = { version = "0.2.13", default-features = false, features = [
     "trace",
 ] }
+aoc-common = { path = "aoc-common" }
