@@ -14,7 +14,7 @@ const OBSTACLE: char = '#';
 pub fn process(input: &str) -> miette::Result<String> {
     let mut grid = make_grid(input);
     // agent is always walking north in the beginning
-    let mut guard_position = find_agent_position(&grid);
+    let mut guard_position = find_guard_position(&grid);
     let mut direction = NORTH;
 
     // iterate as long as the guard is inside the grid
@@ -56,7 +56,7 @@ fn find_distinct_positions(grid: &LabMap) -> Vec<Point2D> {
 }
 
 #[tracing::instrument]
-fn find_agent_position(grid: &LabMap) -> Point2D {
+fn find_guard_position(grid: &LabMap) -> Point2D {
     grid.enumerate()
         .find_map(|(x, y)| {
             let x = x as i32;
