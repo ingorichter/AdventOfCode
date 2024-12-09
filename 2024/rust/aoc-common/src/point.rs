@@ -108,4 +108,15 @@ mod tests {
         let other = Point2D::new(3, 4);
         assert_eq!(point.manhattan_distance(&other), 4);
     }
+
+    #[test]
+    fn pair_of_points() {
+        let point = Point2D::new(1, 2);
+        let other = Point2D::new(3, 4);
+        let pair = (point, other);
+        let another_pair = (point, other);
+        let reverse_pair = (other, point);
+        assert_eq!(pair, another_pair);
+        assert_ne!(pair, reverse_pair);
+    }
 }

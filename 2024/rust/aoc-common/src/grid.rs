@@ -138,13 +138,10 @@ impl<T> Grid<T> {
 ///
 /// * `true` if the point is within the grid bounds, `false` otherwise.
 pub fn is_safe<T>(point: &Point2D, grid: &Grid<T>) -> bool {
-    if point.x < 0 || point.x >= grid.columns() as i32 {
-        return false;
-    }
-    if point.y < 0 || point.y >= grid.rows() as i32 {
-        return false;
-    }
-    true
+    point.x >= 0 
+        && point.x < grid.columns() as i32 
+        && point.y >= 0 
+        && point.y < grid.rows() as i32
 }
 
 // #[tracing::instrument]
