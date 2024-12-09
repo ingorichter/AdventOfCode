@@ -4,6 +4,7 @@ use crate::{grid::Grid, point::Point2D};
 
 use itertools::Itertools;
 
+#[tracing::instrument]
 pub fn make_grid(input: &str) -> Grid<char> {
     let mut grid = Grid::new(vec![]);
     for line in input.lines() {

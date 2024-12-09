@@ -42,6 +42,16 @@ impl Point2D {
     pub fn manhattan_distance(&self, other: &Point2D) -> i32 {
         (self.x - other.x).abs() + (self.y - other.y).abs()
     }
+
+    pub fn rotate_clockwise(&self) -> Point2D {
+        match *self {
+            NORTH => EAST,
+            EAST => SOUTH,
+            SOUTH => WEST,
+            WEST => NORTH,
+            _ => panic!("Invalid rotation"),
+        }
+    }
 }
 
 impl ops::Add<Point2D> for Point2D {
