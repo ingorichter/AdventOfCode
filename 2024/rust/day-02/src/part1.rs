@@ -13,11 +13,11 @@ pub fn process(input: &str) -> miette::Result<String> {
             w[1] - w[0]
         }).collect();
 
-        let all_the_same_sign = diffs.iter().all(|&diff| {
+        let all_the_same_sign_and_inrange = diffs.iter().all(|&diff| {
             (diff == 0 || diff.signum() == diffs[0].signum()) && (1..=3).contains(&(diff).abs())
         });
 
-        if all_the_same_sign {
+        if all_the_same_sign_and_inrange {
             safe_reports += 1;
         }
     }

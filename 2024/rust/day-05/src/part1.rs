@@ -1,7 +1,7 @@
 fn all_pairs<T>(vec: &[T]) -> impl Iterator<Item = (&T, &T)> {
-    vec.iter().enumerate().flat_map(move |(i, x)| {
-        vec.iter().skip(i + 1).map(move |y| (x, y))
-    })
+    vec.iter()
+        .enumerate()
+        .flat_map(move |(i, x)| vec.iter().skip(i + 1).map(move |y| (x, y)))
 }
 
 #[tracing::instrument]
@@ -35,12 +35,12 @@ pub fn process(input: &str) -> miette::Result<String> {
             pages_to_update.push(group);
         }
     }
- 
-    // instead of copying the valid update, I could probably filter the existing updates and return only the valid ones
-    let sum: u32 = pages_to_update.iter()
-    .filter(|update| all_pairs(update).all(|pair| rules.contains(&(*pair.0, *pair.1))))
-    .map(|update| update[update.len() / 2])
-    .sum();
+
+    let sum: u32 = pages_to_update
+        .iter()
+        .filter(|update| all_pairs(update).all(|pair| rules.contains(&(*pair.0, *pair.1))))
+        .map(|update| update[update.len() / 2])
+        .sum();
 
     Ok(sum.to_string())
 }

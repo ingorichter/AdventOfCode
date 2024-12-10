@@ -27,7 +27,7 @@ fn find_multiple_patterns(grid_chars: &Grid, patterns: &[Vec<Vec<char>>]) -> Vec
 fn matches_pattern(grid: &[Vec<char>], pattern: &[Vec<char>], start_row: usize, start_col: usize) -> bool {
     for r in 0..pattern.len() {
         for c in 0..pattern[r].len() {
-            if grid[start_row + r][start_col + c] != pattern[r][c] {
+            if pattern[r][c] != ' ' && grid[start_row + r][start_col + c] != pattern[r][c] {
                 return false;
             }
         }
