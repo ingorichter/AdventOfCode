@@ -76,6 +76,20 @@ impl ops::Sub<Point2D> for Point2D {
     }
 }
 
+impl ops::AddAssign<Point2D> for Point2D {
+    fn add_assign(&mut self, other: Point2D) {
+        self.x += other.x;
+        self.y += other.y;
+    }
+}
+
+impl ops::SubAssign<Point2D> for Point2D {
+    fn sub_assign(&mut self, other: Point2D) {
+        self.x -= other.x;
+        self.y -= other.y;
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
