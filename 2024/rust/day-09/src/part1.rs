@@ -47,12 +47,12 @@ pub fn process(input: &str) -> miette::Result<String> {
         .rev()
         .filter_map(|(index, t)| match t {
             Type::File(file_id) => {
-                #[cfg(debug_assertions)]
-                println!("Found file at index {} with id {}", index, file_id);
+                // #[cfg(debug_assertions)]
+                // println!("Found file at index {} with id {}", index, file_id);
 
                 if let Some(target_index) = empty_space_indices.pop() {
-                    #[cfg(debug_assertions)]
-                    println!("Moving to target index {}", target_index);
+                    // #[cfg(debug_assertions)]
+                    // println!("Moving to target index {}", target_index);
 
                     Some(file_id * target_index)
                 } else {
@@ -60,8 +60,8 @@ pub fn process(input: &str) -> miette::Result<String> {
                 }
             },
             Type::Space => {
-                #[cfg(debug_assertions)]
-                println!("Found space at index {}", index);
+                // #[cfg(debug_assertions)]
+                // println!("Found space at index {}", index);
 
                 if !empty_space_indices.is_empty() {
                     empty_space_indices.remove(0);    
@@ -92,7 +92,16 @@ mod tests {
     #[test]
     fn test_process_simple() -> miette::Result<()> {
         let input = "12345";
-        assert_eq!("61", process(input)?);
+        assert_eq!("60", process(input)?);
+        Ok(())
+    }
+
+    #[test]
+    // #[ignore]
+    fn test_process_simple_5() -> miette::Result<()> {
+        let input = "233313312141413140256";
+
+        assert_eq!("3383", process(input)?);
         Ok(())
     }
 }
