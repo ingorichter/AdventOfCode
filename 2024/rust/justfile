@@ -11,7 +11,7 @@ bench-all:
 bench day part:
     cargo bench --bench {{day}}-bench {{part}} >> {{day}}.bench.txt
 profile day part:
-    cargo build --profile profiling -p {{day}}
+    cargo build --profile profiling -p {{day}} --bin {{part}}
     samply record target/profiling/{{part}}
 # create the directory for a new day's puzzle and fetch the input
 create day:

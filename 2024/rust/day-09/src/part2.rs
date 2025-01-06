@@ -30,24 +30,14 @@ pub fn process(input: &str) -> miette::Result<String> {
     // reverse iterate through disc_layout and move every file to the next free space at the beginning of disc_layout based on the zeroth element of empty_space_indices
     let mut free_space: Vec<File> = files
         .iter()
-        .filter_map(|f| {
-            if f.file_id == FREE_SPACE_ID {
-                Some(f.clone())
-            } else {
-                None
-            }
-        })
+        .filter(|f| f.file_id == FREE_SPACE_ID)
+        .cloned()
         .collect();
-
+    
     let files_to_move: Vec<File> = files
         .iter()
-        .filter_map(|f| {
-            if f.file_id != FREE_SPACE_ID {
-                Some(f.clone())
-            } else {
-                None
-            }
-        })
+        .filter(|f| f.file_id != FREE_SPACE_ID)
+        .cloned()
         .collect();
 
     // dbg!(&free_space);
@@ -58,35 +48,25 @@ pub fn process(input: &str) -> miette::Result<String> {
     // the current position, otherwise "move" the file the new location, calculate the checksum and
     // update the free space entry to reflect that this space is now smaller or entirely gone
 
-    // println!("===> rearrange files to fill empty space");
-    let checksums: Vec<_> = files_to_move
+    let checksum: usize = files_to_move
         .iter()
         .rev()
         .map(|file_to_move| {
-            // #[cfg(debug_assertions)]
-            // println!("Try to move file {:?}", file_to_move);
+            #[cfg(debug_assertions)]
+            println!("Try to move file {:?}", file_to_move);
 
             let moved_file = move_file_to_free_space(&mut free_space, file_to_move);
 
+            // #[cfg(debug_assertions)]
             // if moved_file.start != file_to_move.start {
-            //     #[cfg(debug_assertions)]
             //     println!("Successfully moved {:?} to {:?}", file_to_move, moved_file);
             // } else {
-            //     #[cfg(debug_assertions)]
             //     println!("Failed to move {:?}", file_to_move);
             // }
 
-            let checksum = moved_file.checksum();
-        
-            // #[cfg(debug_assertions)]
-            // println!("Checksum for {:?} is {}", &moved_file, checksum);
-            checksum
+            moved_file.checksum()
         })
-        .collect();
-
-    // println!("===> Finished moving files to free space {:?}", free_space);
-    // dbg!(&checksums);
-    let checksum: usize = checksums.iter().sum();
+        .sum();
 
     Ok(checksum.to_string())
 }
@@ -117,7 +97,7 @@ fn move_file_to_free_space(free_space: &mut [File], file_to_move: &File) -> File
                 length: file_to_move.length,
                 file_id: file_to_move.file_id,
             };
-            
+
             // update the empty space, it might be used for another file
             free_space.start += file_to_move.length;
             free_space.length -= file_to_move.length;
@@ -204,8 +184,6 @@ mod tests {
     // #[ignore]
     fn test_process_simple() -> miette::Result<()> {
         let input = "12345";
-        let disc_layout: Vec<BlockType> = create_disc_layout(input);
-        // dbg!(&disc_layout);
         // |-|00|111|0000|33333|
         // 3*1+4*1+5*1+10*2+11*2+12*2+13*2+14*2
         assert_eq!("132", process(input)?);
@@ -219,7 +197,7 @@ mod tests {
         assert_eq!("34", process(input)?);
         Ok(())
     }
-    
+
     #[test]
     // #[ignore]
     fn test_process_simple_3() -> miette::Result<()> {
