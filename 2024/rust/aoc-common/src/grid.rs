@@ -67,7 +67,7 @@ impl<T> Grid<T> {
     }
 
     pub fn set(&mut self, point: &Point2D, value: T) {
-        if !is_safe(point, self) {
+        if !self.is_safe(point) {
             return;
         }
         self.grid[point.y as usize][point.x as usize] = value;
@@ -125,23 +125,25 @@ impl<T> Grid<T> {
     // pub fn enumerate(&self) -> impl Iterator<Item = (usize, usize)> {
     //     (0..self.rows()).flat_map(|y| (0..self.columns()).map(move |x| (x, y)))
     // }
-}
 
-/// Checks if a given point is within the bounds of the grid.
-///
-/// # Arguments
-///
-/// * `point` - A reference to a `Point2D` representing the coordinates to check.
-/// * `grid` - A reference to the `Grid` containing the elements.
-///
-/// # Returns
-///
-/// * `true` if the point is within the grid bounds, `false` otherwise.
-pub fn is_safe<T>(point: &Point2D, grid: &Grid<T>) -> bool {
-    point.x >= 0 
-        && point.x < grid.columns() as i32 
-        && point.y >= 0 
-        && point.y < grid.rows() as i32
+    /// Checks if a given point is within the bounds of the grid.
+    ///
+    /// # Arguments
+    ///
+    /// * `point` - A reference to a `Point2D` representing the coordinates to check.
+    /// * `grid` - A reference to the `Grid` containing the elements.
+    ///
+    /// # Returns
+    ///
+    /// * `true` if the point is within the grid bounds, `false` otherwise.
+    pub fn is_safe(&self, point: &Point2D) -> bool {
+        point.x >= 0
+            && point.x < self.columns() as i32
+            && point.y >= 0
+            && point.y < self.rows() as i32
+
+        // is_safe(point, self)
+    }
 }
 
 // #[tracing::instrument]

@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use aoc_common::{
     common::make_grid,
-    grid::{is_safe, Grid},
+    grid::Grid,
     point::{Point2D, NORTH},
 };
 
@@ -20,7 +20,7 @@ fn walk_the_grid(guard_position: &Point2D, grid: &LabMap) -> (HashSet<Point2D>, 
     let mut visited_positions: HashSet<(Point2D, Point2D)> = HashSet::new();
 
     // iterate as long as the guard is inside the grid
-    while is_safe(&location, &grid) && !visited_positions.contains(&(location, direction)) {
+    while grid.is_safe(&location) && !visited_positions.contains(&(location, direction)) {
         visited_positions.insert((location, direction));
         let new_position = location + direction;
 
@@ -38,7 +38,7 @@ fn walk_the_grid(guard_position: &Point2D, grid: &LabMap) -> (HashSet<Point2D>, 
     let v: HashSet<Point2D> = visited_positions.iter().map(|(pos, _)| *pos).collect();
     // dbg!(&v);
 
-    return (v, is_safe(&location, &grid));
+    return (v, grid.is_safe(&location));
 }
 
 #[tracing::instrument]
@@ -53,9 +53,9 @@ pub fn process(input: &str) -> miette::Result<String> {
         .0
         .iter()
         .filter(|pos| {
-            grid.set(&pos, OBSTACLE);
+            grid.set(pos, OBSTACLE);
             let res = walk_the_grid(&guard_position, &grid);
-            grid.set(&pos, EMPTY);
+            grid.set(pos, EMPTY);
             res.1
         })
         .collect::<Vec<_>>();

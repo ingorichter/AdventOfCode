@@ -1,7 +1,6 @@
 use std::collections::HashSet;
 
 use aoc_common::common::make_grid;
-use aoc_common::grid::is_safe;
 use aoc_common::point::Point2D;
 use itertools::Itertools;
 
@@ -52,11 +51,11 @@ pub fn process(input: &str) -> miette::Result<String> {
     // dbg!(&first_points, &second_points);
     let mut first_points = first_points
         .into_iter()
-        .filter(|p| is_safe(p, &grid))
+        .filter(|p| grid.is_safe(p))
         .collect::<HashSet<Point2D>>();
     let second_points = second_points
         .into_iter()
-        .filter(|p| is_safe(p, &grid))
+        .filter(|p| grid.is_safe(p))
         .collect::<HashSet<Point2D>>();
 
     first_points.extend(second_points.iter());

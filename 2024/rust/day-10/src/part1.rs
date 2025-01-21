@@ -1,5 +1,5 @@
 use aoc_common::common::make_grid_i8;
-use aoc_common::grid::{is_safe, Grid};
+use aoc_common::grid::Grid;
 use aoc_common::point::{Point2D, EAST, NORTH, SOUTH, WEST};
 use std::collections::HashSet;
 
@@ -15,7 +15,7 @@ fn possible_number_of_mountain_tops(grid: &mut TopoMap, current_pos: &Point2D) -
         reachable_mountain_tops: &mut HashSet<Point2D>,
     ) {
         // base cases
-        if !is_safe(current_pos, grid) {
+        if !grid.is_safe(current_pos) {
             return;
         }
 

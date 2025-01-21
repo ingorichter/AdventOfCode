@@ -1,5 +1,5 @@
 use aoc_common::common::make_grid_i8;
-use aoc_common::grid::{is_safe, Grid};
+use aoc_common::grid::Grid;
 use aoc_common::point::{Point2D, EAST, NORTH, SOUTH, WEST};
 
 type TopoMap = Grid<i8>;
@@ -7,14 +7,9 @@ const VISITED: i8 = -1;
 
 #[tracing::instrument]
 fn possible_number_of_trails_to_mountain_tops(grid: &mut TopoMap, current_pos: &Point2D) -> u16 {
-    fn dfs(
-        grid: &mut TopoMap,
-        current_pos: &Point2D,
-        next_value: i8,
-        path_count: &mut u16,
-    ) {
+    fn dfs(grid: &mut TopoMap, current_pos: &Point2D, next_value: i8, path_count: &mut u16) {
         // base cases
-        if !is_safe(current_pos, grid) {
+        if !grid.is_safe(current_pos) {
             return;
         }
 
@@ -35,41 +30,16 @@ fn possible_number_of_trails_to_mountain_tops(grid: &mut TopoMap, current_pos: &
         grid.set(current_pos, VISITED);
         let next_value = current_value + 1;
 
-        dfs(
-            grid,
-            &(*current_pos + NORTH),
-            next_value,
-            path_count,
-        );
-        dfs(
-            grid,
-            &(*current_pos + EAST),
-            next_value,
-            path_count,
-        );
-        dfs(
-            grid,
-            &(*current_pos + SOUTH),
-            next_value,
-            path_count,
-        );
-        dfs(
-            grid,
-            &(*current_pos + WEST),
-            next_value,
-            path_count,
-        );
+        dfs(grid, &(*current_pos + NORTH), next_value, path_count);
+        dfs(grid, &(*current_pos + EAST), next_value, path_count);
+        dfs(grid, &(*current_pos + SOUTH), next_value, path_count);
+        dfs(grid, &(*current_pos + WEST), next_value, path_count);
 
         grid.set(current_pos, current_value);
     }
 
-    let mut total_path_count:u16 = 0;
-    dfs(
-        grid,
-        current_pos,
-        0,
-        &mut total_path_count
-    );
+    let mut total_path_count: u16 = 0;
+    dfs(grid, current_pos, 0, &mut total_path_count);
 
     return total_path_count;
 }

@@ -1,6 +1,6 @@
 use aoc_common::{
     common::make_grid,
-    grid::{is_safe, Grid},
+    grid::Grid,
     point::{Point2D, NORTH},
 };
 
@@ -18,7 +18,7 @@ pub fn process(input: &str) -> miette::Result<String> {
     let mut direction = NORTH;
 
     // iterate as long as the guard is inside the grid
-    while is_safe(&guard_position, &grid) {
+    while grid.is_safe(&guard_position) {
         let new_position = guard_position + direction;
 
         grid.set(&guard_position, VISITED);
