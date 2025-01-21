@@ -13,6 +13,25 @@ pub fn make_grid(input: &str) -> Grid<char> {
     grid
 }
 
+// TODO(Ingo) make this more generic and let the caller provide a transformation function
+#[tracing::instrument]
+pub fn make_grid_u8(input: &str) -> Grid<u8> {
+    let mut grid = Grid::new(vec![]);
+    for line in input.lines() {
+        grid.push(line.chars().map(|c| c as u8 - b'0').collect());
+    }
+    grid
+}
+
+#[tracing::instrument]
+pub fn make_grid_i8(input: &str) -> Grid<i8> {
+    let mut grid = Grid::new(vec![]);
+    for line in input.lines() {
+        grid.push(line.chars().map(|c| c.to_digit(10).unwrap() as i8).collect());
+    }
+    grid
+}
+
 #[tracing::instrument]
 pub fn calc_shortest_path(grid: &Grid<char>, offset_factor: usize) -> i64 {
     let empty_lines = grid.iter_rows().enumerate().filter(|(_, row)| row.iter().all(|&c| c == '.')).map(|(i, _)| i).collect::<Vec<usize>>();
