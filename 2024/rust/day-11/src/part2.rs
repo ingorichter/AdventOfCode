@@ -58,7 +58,7 @@ fn sum_of_blinks(stones: &Vec<EngravedNumber>, blinks: u32) -> u64 {
 pub fn process(input: &str) -> miette::Result<String> {
     let stones: Vec<EngravedNumber> = read_input(input);
 
-    let total_stones: u64 = sum_of_blinks(&stones, 25);
+    let total_stones: u64 = sum_of_blinks(&stones, 75);
 
     Ok(total_stones.to_string())
 }
