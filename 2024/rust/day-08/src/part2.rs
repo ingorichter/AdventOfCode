@@ -1,7 +1,6 @@
 use std::collections::HashSet;
 
 use aoc_common::common::make_grid;
-use aoc_common::grid::is_safe;
 use aoc_common::point::Point2D;
 use itertools::Itertools;
 
@@ -34,7 +33,7 @@ pub fn process(input: &str) -> miette::Result<String> {
         let distance = *pos1 - *pos2;
         let mut new_pos = *pos1 + distance;
         antinodes_set1.insert(*pos1);
-        while is_safe(&new_pos, &grid) {
+        while grid.is_safe(&new_pos) {
             antinodes_set1.insert(new_pos);
             new_pos += distance;
         }
@@ -46,7 +45,7 @@ pub fn process(input: &str) -> miette::Result<String> {
             let distance = *pos1 - *pos2;
             let mut antinodes = vec![*pos1];
             let mut new_pos = *pos1 - distance;
-            while is_safe(&new_pos, &grid) {
+            while grid.is_safe(&new_pos) {
                 antinodes.push(new_pos);
                 new_pos -= distance;
             }
