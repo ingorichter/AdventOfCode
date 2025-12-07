@@ -4,9 +4,8 @@ pub fn process(input: &str) -> miette::Result<String> {
     // info!("Parsed battery bank: {:?}", battery_banks);
 
     let result = battery_banks.iter().map(|bank| {
-        find_maximum_joltage_sum(bank, 2)
+        find_maximum_joltage_sum(bank, 12)
     }).map(|vec| vec_to_number(&vec)).sum::<i64>();
-
 
     Ok(result.to_string())
 }
@@ -30,7 +29,7 @@ fn find_maximum_joltage_sum(battery_bank: &[i8], k: usize) -> Vec<i8> {
         let max_digit_in_range = *battery_bank[start_index..search_end].iter().max().unwrap();
 
         for (j, value) in battery_bank.iter().enumerate().take(search_end).skip(start_index) {
-            // for j in start_index..search_end {
+        // for j in start_index..search_end {
             if *value == max_digit_in_range {
                 result.push(*value);
                 start_index = j + 1;
@@ -58,7 +57,7 @@ mod tests {
 811111111111119
 234234234234278
 818181911112111";
-        assert_eq!("357", process(input)?);
+        assert_eq!("3121910778619", process(input)?);
         Ok(())
     }
 }
